@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Box Game</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/forms.css">
+    <style>
+        .hero-section {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 3rem;
+        }
+        .logo-container {
+            margin-bottom: 2rem;
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        .main-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .input-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .function-input {
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+            border: 3px solid #e9ecef;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .function-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.3rem rgba(0,123,255,0.25);
+        }
+        .play-button {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .play-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(40,167,69,0.3);
+        }
+        .play-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .error-message {
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-section">
+        <div class="logo-container">
+            <img src="/images/logo.jpg" alt="ProTech Club Logo" class="logo">
+        </div>
+        <h1>🎮 Black Box Game</h1>
+        <p>Nhập mã để bắt đầu chơi</p>
+        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 1rem;">Powered by ProTech Club</p>
+    </div>
+    
+    <div class="main-container">
+        <div class="input-container">
+            <h2 style="margin-bottom: 1rem; color: #333;">🔐 Nhập mã vòng chơi</h2>
+            <p style="color: #666; margin-bottom: 2rem;">Nhập mã để truy cập vòng chơi tương ứng</p>
+            
+            <input 
+                type="text" 
+                id="functionCode" 
+                class="function-input" 
+                placeholder="blackbox"
+                maxlength="8"
+                onkeyup="validateInput()"
+                onpaste="setTimeout(validateInput, 10)"
+            >
+            
+            <div id="errorMessage" class="error-message">
+                ❌ Mã vòng chơi không hợp lệ! Vui lòng kiểm tra lại.
+            </div>
+            
+            <button 
+                id="playButton" 
+                class="play-button" 
+                onclick="playFunction()" 
+                disabled
+            >
+                🎮 Chơi ngay
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Danh sách mã function đang hoạt động (sẽ được lấy từ API)
+        let activeCodes = [];
+
+        function validateInput() {
+            const input = document.getElementById('functionCode');
+            const playButton = document.getElementById('playButton');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Lấy giá trị và chuyển thành chữ thường
+            let value = input.value.toLowerCase();
+            
+            // Cập nhật input với chữ thường
+            input.value = value;
+            
+            // Kiểm tra mã function (8 ký tự)
+            if (activeCodes.includes(value)) {
+                playButton.disabled = false;
+                playButton.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                errorMessage.style.display = 'none';
+            } else if (value.length > 0) {
+                playButton.disabled = true;
+                playButton.style.background = '#6c757d';
+                errorMessage.style.display = 'block';
+            } else {
+                playButton.disabled = true;
+                playButton.style.background = '#6c757d';
+                errorMessage.style.display = 'none';
+            }
+        }
+
+        function playFunction() {
+            const code = document.getElementById('functionCode').value.toLowerCase();
+            
+            if (activeCodes.includes(code)) {
+                // Hiệu ứng loading
+                const button = document.getElementById('playButton');
+                button.innerHTML = '⏳ Đang tải...';
+                button.disabled = true;
+                
+                setTimeout(() => {
+                    // Chuyển đến black_box với mã function trong URL parameter
+                    window.location.href = `/black_box?code=${code}`;
+                }, 800);
+            }
+        }
+
+
+
+        // Danh sách mã function hợp lệ (client-side)
+        const validCodes = [
+            'ab12dg23',
+            'xy9k4lm2',
+            'qr78op56',
+            'mn34st90',
+            'kl56uv12',
+            'zx90qw34',
+            'rt12gh78',
+            'cv34bn56',
+            'pl78ok90',
+            'hj23df67',
+            'we45ty89',
+            'ui67za01'
+        ];
+        
+        // Load active codes
+        function loadActiveCodes() {
+            // Tất cả các codes đều active
+            activeCodes = [...validCodes];
+        }
+
+        // Focus vào input khi trang load
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Load danh sách mã trước
+            await loadActiveCodes();
+            
+            // Sau đó focus vào input
+            document.getElementById('functionCode').focus();
+        });
+
+        // Xử lý phím Enter
+        document.getElementById('functionCode').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (!document.getElementById('playButton').disabled) {
+                    playFunction();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

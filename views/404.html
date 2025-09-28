@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Không tìm thấy trang | Black Box</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/forms.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .error-container {
+            text-align: center;
+            color: white;
+            max-width: 500px;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4d9de0);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+        }
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .error-title {
+            font-size: 2rem;
+            margin: 1rem 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .error-message {
+            font-size: 1.1rem;
+            margin: 1.5rem 0;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        .error-actions {
+            margin-top: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            border-color: transparent;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #218838, #1e7e34);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+        }
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .shape {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 20%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            bottom: 10%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        .error-logo {
+            margin-bottom: 1.5rem;
+        }
+        .error-logo img {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        .error-logo img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        .error-logo p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <div class="error-container">
+        <div class="error-logo">
+            <img src="/images/logo.jpg" alt="ProTech Club Logo">
+            <p>ProTech Club</p>
+        </div>
+        <div class="error-icon">🎮</div>
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Trang không tồn tại!</h2>
+        <p class="error-message">
+            Oops! Có vẻ như bạn đã nhập sai mã vòng chơi hoặc đường dẫn không tồn tại trong Black Box.
+            <br><br>
+            Hãy kiểm tra lại mã vòng chơi hoặc quay về trang chủ để thử lại.
+        </p>
+        
+        <div class="error-actions">
+            <a href="/home" class="btn btn-primary">🏠 Về trang chủ</a>
+            <a href="javascript:history.back()" class="btn">← Quay lại</a>
+        </div>
+        
+       
+    </div>
+
+    <script>
+        // Easter egg - shake effect khi click vào 404
+        document.querySelector('.error-code').addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'gradient 3s ease infinite, shake 0.5s ease-in-out';
+            }, 10);
+            
+            setTimeout(() => {
+                this.style.animation = 'gradient 3s ease infinite';
+            }, 500);
+        });
+        
+        // CSS cho shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Random tạo thêm shapes
+        function createRandomShape() {
+            const shape = document.createElement('div');
+            shape.className = 'shape';
+            shape.style.width = Math.random() * 50 + 30 + 'px';
+            shape.style.height = shape.style.width;
+            shape.style.left = Math.random() * 100 + '%';
+            shape.style.top = Math.random() * 100 + '%';
+            shape.style.animationDelay = Math.random() * 6 + 's';
+            document.querySelector('.floating-shapes').appendChild(shape);
+            
+            setTimeout(() => {
+                shape.remove();
+            }, 12000);
+        }
+        
+        // Tạo shapes ngẫu nhiên mỗi 3 giây
+        setInterval(createRandomShape, 3000);
+    </script>
+</body>
+</html>

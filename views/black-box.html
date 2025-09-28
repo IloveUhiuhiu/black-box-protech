@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Box Game</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/forms.css">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        .function-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .string-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-family: monospace;
+        }
+        .string-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+        }
+        .execute-button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        .execute-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(40,167,69,0.3);
+        }
+        .result-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 2rem 0;
+            display: none;
+        }
+        .result-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        .function-info {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #007bff;
+        }
+        .nav-buttons {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        .header-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .header-logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        .header-logo img:hover {
+            transform: scale(1.05);
+        }
+        .header-logo p {
+            margin-top: 0.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-logo">
+            <img src="/images/logo.jpg" alt="ProTech Club Logo">
+            <p>ProTech Club</p>
+        </div>
+        
+        <div class="function-info">
+            <h2 id="functionTitle">🔧 Black Box</h2>
+            <p id="functionDescription">Đang tải thông tin function...</p>
+        </div>
+        
+        <div class="function-container">
+            <div class="input-group">
+                <label for="stringInput">Nhập input:</label>
+                <input 
+                    type="text" 
+                    id="stringInput" 
+                    class="string-input" 
+                    placeholder="Nhập input để xử lý..."
+                    oninput="updatePreview()"
+                >
+            </div>
+            
+            <button onclick="executeFunction()" class="execute-button" id="executeBtn">
+                ⚡ Thực thi function
+            </button>
+        </div>
+        
+        <div id="resultDisplay" class="result-display">
+            <h3 style="margin-top: 0;">✨ Kết quả</h3>
+            <div class="result-value" id="resultValue">
+                <!-- Kết quả sẽ hiện ở đây -->
+            </div>
+            
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="/home" class="btn btn-secondary">🎮 Về game</a>
+        </div>
+    </div>
+
+    <script>
+        // Lấy mã function từ URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const functionCode = urlParams.get('code');
+        let functionInfo = {};
+        
+        
+        // =================================================================
+        //   Các hàm xử lý String + Number (theo yêu cầu)
+        // =================================================================
+
+        const countSpaces = (str) => (str.match(/ /g) || []).length;
+        const startsWithA = (str) => str.toLowerCase().startsWith('a');
+        const isGreaterThan100 = (num) => num > 100;
+        const reverseString = (str) => str.split('').reverse().join('');
+        const countVowels = (str) => (str.toLowerCase().match(/[aeiou]/g) || []).length;
+        const isPalindrome = (str) => {
+            const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+            return cleaned === cleaned.split('').reverse().join('');
+        };
+        const countWords = (str) => str.trim().split(/\s+/).length;
+        const extractDigits = (str) => str.match(/\d/g)?.join('') || '';
+        const findFirstA = (str) => str.toLowerCase().indexOf('a');
+        const countUpperCaseChars = (str) => (str.match(/[A-Z]/g) || []).length;
+        const sumDigits = (num) => String(num).split('').reduce((sum, d) => sum + Number(d), 0);
+        const fizzBuzz = (num) => {
+            if (num % 15 === 0) return 'FizzBuzz';
+            if (num % 3 === 0) return 'Fizz';
+            if (num % 5 === 0) return 'Buzz';
+            return num;
+        };
+
+        // =================================================================
+        //   Metadata cho từng hàm với mã random 8 ký tự
+        // =================================================================
+        const functionDetails = {
+            ab12dg23: {
+                name: 'Count Spaces',
+                description: 'Đếm số lượng khoảng trắng trong chuỗi',
+                icon: '␣',
+                input: 'Chuỗi',
+                output: 'Số nguyên',
+                active: true,
+                func: countSpaces
+            },
+            xy9k4lm2: {
+                name: 'Starts With A',
+                description: 'Kiểm tra chuỗi có bắt đầu bằng chữ "a"',
+                icon: '🅰️',
+                input: 'Chuỗi',
+                output: 'Boolean',
+                active: true,
+                func: startsWithA
+            },
+            qr78op56: {
+                name: 'Is Greater Than 100',
+                description: 'Kiểm tra số có lớn hơn 100 không',
+                icon: '📈',
+                input: 'Số',
+                output: 'Boolean',
+                active: true,
+                func: isGreaterThan100
+            },
+            mn34st90: {
+                name: 'Reverse String',
+                description: 'Đảo ngược chuỗi ký tự',
+                icon: '🔄',
+                input: 'Chuỗi',
+                output: 'Chuỗi',
+                active: true,
+                func: reverseString
+            },
+            kl56uv12: {
+                name: 'Count Vowels',
+                description: 'Đếm số lượng nguyên âm (a, e, i, o, u)',
+                icon: '🔎',
+                input: 'Chuỗi',
+                output: 'Số nguyên',
+                active: true,
+                func: countVowels
+            },
+            zx90qw34: {
+                name: 'Is Palindrome',
+                description: 'Kiểm tra chuỗi có phải Palindrome',
+                icon: '🔁',
+                input: 'Chuỗi',
+                output: 'Boolean',
+                active: true,
+                func: isPalindrome
+            },
+            rt12gh78: {
+                name: 'Count Words',
+                description: 'Đếm số lượng từ trong chuỗi',
+                icon: '📖',
+                input: 'Chuỗi',
+                output: 'Số nguyên',
+                active: true,
+                func: countWords
+            },
+            cv34bn56: {
+                name: 'Extract Digits',
+                description: 'Lấy tất cả các chữ số trong chuỗi',
+                icon: '🔢',
+                input: 'Chuỗi',
+                output: 'Chuỗi',
+                active: true,
+                func: extractDigits
+            },
+            pl78ok90: {
+                name: 'Find First A',
+                description: 'Trả về vị trí của chữ "a" đầu tiên',
+                icon: '📍',
+                input: 'Chuỗi',
+                output: 'Số nguyên',
+                active: true,
+                func: findFirstA
+            },
+            hj23df67: {
+                name: 'Count Uppercase Characters',
+                description: 'Đếm số ký tự in hoa trong chuỗi',
+                icon: '🔠',
+                input: 'Chuỗi',
+                output: 'Số nguyên',
+                active: true,
+                func: countUpperCaseChars
+            },
+            we45ty89: {
+                name: 'Sum Digits',
+                description: 'Tính tổng các chữ số của một số',
+                icon: '➕',
+                input: 'Số',
+                output: 'Số',
+                active: true,
+                func: sumDigits
+            },
+            ui67za01: {
+                name: 'FizzBuzz',
+                description: 'Trả về Fizz/Buzz/FizzBuzz theo quy tắc 3-5-15',
+                icon: '🎲',
+                input: 'Số',
+                output: 'Chuỗi hoặc Số',
+                active: true,
+                func: fizzBuzz
+            }
+        };
+
+        // =================================================================
+        //   Danh sách mã function hợp lệ (hardcode)
+        // =================================================================
+        const validCodes = [
+            'ab12dg23',
+            'xy9k4lm2',
+            'qr78op56',
+            'mn34st90',
+            'kl56uv12',
+            'zx90qw34',
+            'rt12gh78',
+            'cv34bn56',
+            'pl78ok90',
+            'hj23df67',
+            'we45ty89',
+            'ui67za01'
+        ];
+
+        
+        // Kiểm tra mã function có hợp lệ và active không
+        function isValidAndActive(code) {
+            return validCodes.includes(code) && functionDetails[code]?.active;
+        }
+        
+        // Load thông tin function
+        function loadFunctionInfo() {
+            if (isValidAndActive(functionCode)) {
+                functionInfo = functionDetails[functionCode];
+            }
+            initFunction();
+        }
+        
+        // Khởi tạo function
+        function initFunction() {
+            if (functionInfo) {
+                document.getElementById('functionTitle').innerHTML = `🔧 Mã vòng chơi: ${functionCode}`;
+                document.getElementById('functionDescription').innerHTML = `
+                    <strong>Input:</strong> ${functionInfo.input}<br>
+                    <strong>Output:</strong> ${functionInfo.output}
+                `;
+                document.getElementById('executeBtn').innerHTML = `⚡ Thực thi`;
+                document.title = `${functionCode} - Black Box`;
+            } else {
+                document.getElementById('functionTitle').innerHTML = '❌ Function không tồn tại';
+                document.getElementById('functionDescription').textContent = 'Mã function không hợp lệ hoặc không hoạt động.';
+            }
+        }
+        
+        function updatePreview() {
+            const input = document.getElementById('stringInput').value;
+            const executeBtn = document.getElementById('executeBtn');
+            
+            if (input.length > 0) {
+                executeBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+            } else {
+                executeBtn.style.background = '#6c757d';
+            }
+        }
+        
+        function executeFunction() {
+            const input = document.getElementById('stringInput').value;
+            
+            if (!input) {
+                alert('⚠️ Vui lòng nhập chuỗi!');
+                document.getElementById('stringInput').focus();
+                return;
+            }
+            
+            if (!functionInfo) {
+                alert('❌ Function không tồn tại!');
+                return;
+            }
+            
+            try {
+                // Thực thi function trực tiếp
+                const result = functionInfo.func(input);
+                
+                // Hiển thị kết quả
+                document.getElementById('resultValue').textContent = result;
+                document.getElementById('resultDisplay').style.display = 'block';
+                
+                // Scroll xuống kết quả
+                document.getElementById('resultDisplay').scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                alert('❌ Lỗi khi thực thi function: ' + error.message);
+            }
+        }
+        
+        // Xử lý phím Enter
+        document.getElementById('stringInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                executeFunction();
+            }
+        });
+        
+        // Khởi tạy khi trang load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFunctionInfo(); // Load function info
+            document.getElementById('stringInput').focus();
+        });
+    </script>
+</body>
+</html>
