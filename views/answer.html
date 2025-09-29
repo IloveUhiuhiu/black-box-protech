@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đáp Án - Black Box Game</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/forms.css">
+    <style>
+        .header-section {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            margin-bottom: 3rem;
+        }
+        .logo-container {
+            margin-bottom: 2rem;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .answer-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-left: 5px solid #28a745;
+        }
+        .difficulty-easy { border-left-color: #28a745; }
+        .difficulty-medium { border-left-color: #ffc107; }
+        .difficulty-hard { border-left-color: #fd7e14; }
+        .difficulty-expert { border-left-color: #dc3545; }
+        
+        .function-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .function-code {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #495057;
+        }
+        .difficulty-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        .badge-easy { background: #28a745; }
+        .badge-medium { background: #ffc107; color: #212529; }
+        .badge-hard { background: #fd7e14; }
+        .badge-expert { background: #dc3545; }
+        
+        .function-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin: 0.5rem 0;
+        }
+        .function-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .function-logic {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            border: 1px solid #e9ecef;
+        }
+        .test-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .test-case {
+            background: #e9ecef;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        .section-header {
+            text-align: center;
+            margin: 3rem 0 2rem 0;
+            padding: 1rem;
+            background: linear-gradient(135deg, #6c757d, #495057);
+            color: white;
+            border-radius: 8px;
+        }
+        .nav-buttons {
+            text-align: center;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            margin: 0.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        .warning-box {
+            background: #fff3cd;
+            color: #856404;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border: 1px solid #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <div class="logo-container">
+            <img src="/images/logo.jpg" alt="ProTech Club Logo" class="logo">
+        </div>
+        <h1>📋 Đáp Án Black Box Game</h1>
+        <p>Tất cả 22 hàm được giải thích chi tiết</p>
+        <p style="opacity: 0.8; font-size: 0.9rem; margin-top: 1rem;">ProTech Club - Dành cho giảng viên và admin</p>
+    </div>
+    
+    <div class="main-container">
+        <div class="warning-box">
+            <h3>⚠️ Lưu Ý Quan Trọng</h3>
+            <p><strong>Trang này chứa đáp án của tất cả các hàm Black Box.</strong></p>
+            <p>Khuyến nghị: Chỉ xem sau khi đã thử sức với từng thử thách để có trải nghiệm học tập tốt nhất!</p>
+        </div>
+
+        <!-- Easy Level -->
+        <div class="section-header">
+            <h2>🟢 CẤP ĐỘ DỄ (8 hàm)</h2>
+            <p>Các phép toán cơ bản, dễ nhận biết pattern</p>
+        </div>
+
+        <div class="answer-card difficulty-easy">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">st01ln34</span>
+                    <span class="difficulty-badge badge-easy">⭐ Dễ</span>
+                </div>
+            </div>
+            <h3 class="function-name">📏 Get String Length</h3>
+            <p class="function-description">Trả về độ dài của chuỗi</p>
+            <div class="function-logic">const getStringLength = (str) => str.length;</div>
+            <div class="test-cases">
+                <div class="test-case">"hello" → 5</div>
+                <div class="test-case">"a" → 1</div>
+                <div class="test-case">"" → 0</div>
+                <div class="test-case">"programming" → 11</div>
+                <div class="test-case">"12345" → 5</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-easy">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">mb16x002</span>
+                    <span class="difficulty-badge badge-easy">⭐ Dễ</span>
+                </div>
+            </div>
+            <h3 class="function-name">✖️ Multiply By Two</h3>
+            <p class="function-description">Nhân số đó với 2</p>
+            <div class="function-logic">const multiplyByTwo = (num) => num * 2;</div>
+            <div class="test-cases">
+                <div class="test-case">5 → 10</div>
+                <div class="test-case">10 → 20</div>
+                <div class="test-case">0 → 0</div>
+                <div class="test-case">-3 → -6</div>
+                <div class="test-case">100 → 200</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-easy">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">dv25by02</span>
+                    <span class="difficulty-badge badge-easy">⭐ Dễ</span>
+                </div>
+            </div>
+            <h3 class="function-name">➗ Divide By Two</h3>
+            <p class="function-description">Chia số đó cho 2</p>
+            <div class="function-logic">const divideByTwo = (num) => num / 2;</div>
+            <div class="test-cases">
+                <div class="test-case">10 → 5</div>
+                <div class="test-case">20 → 10</div>
+                <div class="test-case">0 → 0</div>
+                <div class="test-case">15 → 7.5</div>
+                <div class="test-case">-8 → -4</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-easy">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">ev18ch02</span>
+                    <span class="difficulty-badge badge-easy">⭐ Dễ</span>
+                </div>
+            </div>
+            <h3 class="function-name">⚖️ Is Even</h3>
+            <p class="function-description">Kiểm tra xem số đó có phải là số chẵn không</p>
+            <div class="function-logic">const isEven = (num) => num % 2 === 0;</div>
+            <div class="test-cases">
+                <div class="test-case">4 → true</div>
+                <div class="test-case">5 → false</div>
+                <div class="test-case">0 → true</div>
+                <div class="test-case">-2 → true</div>
+                <div class="test-case">-3 → false</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-easy">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">mn34st90</span>
+                    <span class="difficulty-badge badge-easy">⭐⭐ Dễ</span>
+                </div>
+            </div>
+            <h3 class="function-name">🔄 Reverse String</h3>
+            <p class="function-description">Đảo ngược chuỗi ký tự</p>
+            <div class="function-logic">const reverseString = (str) => str.split('').reverse().join('');</div>
+            <div class="test-cases">
+                <div class="test-case">"hello" → "olleh"</div>
+                <div class="test-case">"abc" → "cba"</div>
+                <div class="test-case">"12345" → "54321"</div>
+                <div class="test-case">"a" → "a"</div>
+                <div class="test-case">"racecar" → "racecar"</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-easy">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">ab12dg23</span>
+                    <span class="difficulty-badge badge-easy">⭐⭐ Dễ</span>
+                </div>
+            </div>
+            <h3 class="function-name">␣ Count Spaces</h3>
+            <p class="function-description">Đếm số lượng khoảng trắng trong chuỗi</p>
+            <div class="function-logic">const countSpaces = (str) => (str.match(/ /g) || []).length;</div>
+            <div class="test-cases">
+                <div class="test-case">"hello world" → 1</div>
+                <div class="test-case">"a b c d" → 3</div>
+                <div class="test-case">"nospace" → 0</div>
+                <div class="test-case">"  " → 2</div>
+                <div class="test-case">" " → 1</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-easy">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">ps24tr01</span>
+                    <span class="difficulty-badge badge-easy">⭐⭐ Dễ</span>
+                </div>
+            </div>
+            <h3 class="function-name">➕ Is Positive</h3>
+            <p class="function-description">Trả về true nếu số dương, false nếu số âm (0 được coi là không dương không âm)</p>
+            <div class="function-logic">const isPositive = (num) => num > 0;</div>
+            <div class="test-cases">
+                <div class="test-case">10 → true</div>
+                <div class="test-case">-5 → false</div>
+                <div class="test-case">0 → false</div>
+                <div class="test-case">0.1 → true</div>
+                <div class="test-case">-0.1 → false</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-easy">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">qr78op56</span>
+                    <span class="difficulty-badge badge-easy">⭐⭐ Dễ</span>
+                </div>
+            </div>
+            <h3 class="function-name">📈 Is Greater Than 100</h3>
+            <p class="function-description">Kiểm tra số có lớn hơn 100 không</p>
+            <div class="function-logic">const isGreaterThan100 = (num) => num > 100;</div>
+            <div class="test-cases">
+                <div class="test-case">150 → true</div>
+                <div class="test-case">100 → false</div>
+                <div class="test-case">99 → false</div>
+                <div class="test-case">101 → true</div>
+                <div class="test-case">-50 → false</div>
+            </div>
+        </div>
+
+        <!-- Medium Level -->
+        <div class="section-header">
+            <h2>🟡 CẤP ĐỘ TRUNG BÌNH (8 hàm)</h2>
+            <p>Cần thử vài test case để hiểu logic</p>
+        </div>
+
+        <div class="answer-card difficulty-medium">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">xy9k4lm2</span>
+                    <span class="difficulty-badge badge-medium">⭐⭐⭐ Trung bình</span>
+                </div>
+            </div>
+            <h3 class="function-name">🅰️ Starts With A</h3>
+            <p class="function-description">Kiểm tra chuỗi có bắt đầu bằng chữ "a" (không phân biệt hoa thường)</p>
+            <div class="function-logic">const startsWithA = (str) => str.toLowerCase().startsWith('a');</div>
+            <div class="test-cases">
+                <div class="test-case">"apple" → true</div>
+                <div class="test-case">"Apple" → true</div>
+                <div class="test-case">"banana" → false</div>
+                <div class="test-case">"amazing" → true</div>
+                <div class="test-case">"Zebra" → false</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-medium">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">kl56uv12</span>
+                    <span class="difficulty-badge badge-medium">⭐⭐⭐ Trung bình</span>
+                </div>
+            </div>
+            <h3 class="function-name">🔎 Count Vowels</h3>
+            <p class="function-description">Đếm số lượng nguyên âm (a, e, i, o, u) trong chuỗi</p>
+            <div class="function-logic">const countVowels = (str) => (str.toLowerCase().match(/[aeiou]/g) || []).length;</div>
+            <div class="test-cases">
+                <div class="test-case">"hello" → 2</div>
+                <div class="test-case">"programming" → 3</div>
+                <div class="test-case">"xyz" → 0</div>
+                <div class="test-case">"aeiou" → 5</div>
+                <div class="test-case">"HELLO" → 2</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-medium">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">lg15gt05</span>
+                    <span class="difficulty-badge badge-medium">⭐⭐⭐ Trung bình</span>
+                </div>
+            </div>
+            <h3 class="function-name">📐 Check Length Greater Than 5</h3>
+            <p class="function-description">Trả về "Dài" nếu độ dài > 5, "Ngắn" nếu ngược lại</p>
+            <div class="function-logic">const checkLengthGreaterThan5 = (str) => str.length > 5 ? 'Dài' : 'Ngắn';</div>
+            <div class="test-cases">
+                <div class="test-case">"hello" → "Ngắn"</div>
+                <div class="test-case">"programming" → "Dài"</div>
+                <div class="test-case">"code" → "Ngắn"</div>
+                <div class="test-case">"javascript" → "Dài"</div>
+                <div class="test-case">"12345" → "Ngắn"</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-medium">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">md23m005</span>
+                    <span class="difficulty-badge badge-medium">⭐⭐⭐ Trung bình</span>
+                </div>
+            </div>
+            <h3 class="function-name">➗ Modulo 5</h3>
+            <p class="function-description">Lấy phần dư khi chia cho 5</p>
+            <div class="function-logic">const modulo5 = (num) => num % 5;</div>
+            <div class="test-cases">
+                <div class="test-case">17 → 2</div>
+                <div class="test-case">25 → 0</div>
+                <div class="test-case">8 → 3</div>
+                <div class="test-case">-7 → -2</div>
+                <div class="test-case">0 → 0</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-medium">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">rt12gh78</span>
+                    <span class="difficulty-badge badge-medium">⭐⭐⭐ Trung bình</span>
+                </div>
+            </div>
+            <h3 class="function-name">📖 Count Words</h3>
+            <p class="function-description">Đếm số lượng từ trong chuỗi</p>
+            <div class="function-logic">const countWords = (str) => str.trim().split(/\s+/).length;</div>
+            <div class="test-cases">
+                <div class="test-case">"hello world" → 2</div>
+                <div class="test-case">"one" → 1</div>
+                <div class="test-case">"a b c d e" → 5</div>
+                <div class="test-case">"  hello   world  " → 2</div>
+                <div class="test-case">"" → 0</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-medium">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">hj23df67</span>
+                    <span class="difficulty-badge badge-medium">⭐⭐⭐ Trung bình</span>
+                </div>
+            </div>
+            <h3 class="function-name">🔠 Count Uppercase Characters</h3>
+            <p class="function-description">Đếm số ký tự in hoa trong chuỗi</p>
+            <div class="function-logic">const countUpperCaseChars = (str) => (str.match(/[A-Z]/g) || []).length;</div>
+            <div class="test-cases">
+                <div class="test-case">"Hello World" → 2</div>
+                <div class="test-case">"HELLO" → 5</div>
+                <div class="test-case">"hello" → 0</div>
+                <div class="test-case">"JavaScript" → 2</div>
+                <div class="test-case">"ABC123def" → 3</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-medium">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">dc41x002</span>
+                    <span class="difficulty-badge badge-medium">⭐⭐⭐ Trung bình</span>
+                </div>
+            </div>
+            <h3 class="function-name">🔤 Double Characters</h3>
+            <p class="function-description">Lặp lại mỗi ký tự 2 lần</p>
+            <div class="function-logic">const doubleChars = (str) => str.split('').map(c => c + c).join('');</div>
+            <div class="test-cases">
+                <div class="test-case">"abc" → "aabbcc"</div>
+                <div class="test-case">"hello" → "hheelllloo"</div>
+                <div class="test-case">"123" → "112233"</div>
+                <div class="test-case">"a" → "aa"</div>
+                <div class="test-case">"Hi!" → "HHii!!"</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-medium">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">cv34bn56</span>
+                    <span class="difficulty-badge badge-medium">⭐⭐⭐ Trung bình</span>
+                </div>
+            </div>
+            <h3 class="function-name">🔢 Extract Digits</h3>
+            <p class="function-description">Lấy tất cả các chữ số trong chuỗi</p>
+            <div class="function-logic">const extractDigits = (str) => str.match(/\d/g)?.join('') || '';</div>
+            <div class="test-cases">
+                <div class="test-case">"abc123def" → "123"</div>
+                <div class="test-case">"hello" → ""</div>
+                <div class="test-case">"12345" → "12345"</div>
+                <div class="test-case">"a1b2c3" → "123"</div>
+                <div class="test-case">"no digits here" → ""</div>
+            </div>
+        </div>
+
+        <!-- Hard Level -->
+        <div class="section-header">
+            <h2>🟠 CẤP ĐỘ KHÓ (4 hàm)</h2>
+            <p>Cần hiểu biết về thuật toán cơ bản</p>
+        </div>
+
+        <div class="answer-card difficulty-hard">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">pl78ok90</span>
+                    <span class="difficulty-badge badge-hard">⭐⭐⭐⭐ Khó</span>
+                </div>
+            </div>
+            <h3 class="function-name">📍 Find First A</h3>
+            <p class="function-description">Trả về vị trí của chữ "a" đầu tiên (không phân biệt hoa thường)</p>
+            <div class="function-logic">const findFirstA = (str) => str.toLowerCase().indexOf('a');</div>
+            <div class="test-cases">
+                <div class="test-case">"banana" → 1</div>
+                <div class="test-case">"hello" → -1</div>
+                <div class="test-case">"Amazing" → 0</div>
+                <div class="test-case">"programming" → 4</div>
+                <div class="test-case">"aaaa" → 0</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-hard">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">we45ty89</span>
+                    <span class="difficulty-badge badge-hard">⭐⭐⭐⭐ Khó</span>
+                </div>
+            </div>
+            <h3 class="function-name">➕ Sum Digits</h3>
+            <p class="function-description">Tính tổng các chữ số của một số</p>
+            <div class="function-logic">const sumDigits = (num) => String(num).split('').reduce((sum, d) => sum + Number(d), 0);</div>
+            <div class="test-cases">
+                <div class="test-case">123 → 6</div>
+                <div class="test-case">999 → 27</div>
+                <div class="test-case">0 → 0</div>
+                <div class="test-case">456 → 15</div>
+                <div class="test-case">1111 → 4</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-hard">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">zx90qw34</span>
+                    <span class="difficulty-badge badge-hard">⭐⭐⭐⭐ Khó</span>
+                </div>
+            </div>
+            <h3 class="function-name">🔁 Is Palindrome</h3>
+            <p class="function-description">Kiểm tra chuỗi có phải Palindrome (đọc xuôi ngược như nhau)</p>
+            <div class="function-logic">const isPalindrome = (str) => {<br>  const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');<br>  return cleaned === cleaned.split('').reverse().join('');<br>};</div>
+            <div class="test-cases">
+                <div class="test-case">"racecar" → true</div>
+                <div class="test-case">"hello" → false</div>
+                <div class="test-case">"madam" → true</div>
+                <div class="test-case">"A man a plan a canal Panama" → true</div>
+                <div class="test-case">"race a car" → false</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-hard">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">ft47cal1</span>
+                    <span class="difficulty-badge badge-hard">⭐⭐⭐⭐ Khó</span>
+                </div>
+            </div>
+            <h3 class="function-name">📈 Factorial</h3>
+            <p class="function-description">Tính giai thừa của một số (n! = n × (n-1) × ... × 1)</p>
+            <div class="function-logic">const factorial = (num) => {<br>  if (num < 0) return NaN;<br>  if (num === 0) return 1;<br>  return num * factorial(num - 1);<br>};</div>
+            <div class="test-cases">
+                <div class="test-case">4 → 24</div>
+                <div class="test-case">0 → 1</div>
+                <div class="test-case">1 → 1</div>
+                <div class="test-case">5 → 120</div>
+                <div class="test-case">3 → 6</div>
+            </div>
+        </div>
+
+        <!-- Expert Level -->
+        <div class="section-header">
+            <h2>🔴 CẤP ĐỘ RẤT KHÓ (2 hàm)</h2>
+            <p>Cần kiến thức toán học hoặc quy tắc đặc biệt</p>
+        </div>
+
+        <div class="answer-card difficulty-expert">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">pr48chk1</span>
+                    <span class="difficulty-badge badge-expert">⭐⭐⭐⭐⭐ Rất khó</span>
+                </div>
+            </div>
+            <h3 class="function-name">💎 Is Prime</h3>
+            <p class="function-description">Kiểm tra xem số có phải là số nguyên tố không</p>
+            <div class="function-logic">const isPrime = (num) => {<br>  if (num <= 1) return false;<br>  for (let i = 2; i <= Math.sqrt(num); i++) {<br>    if (num % i === 0) return false;<br>  }<br>  return true;<br>};</div>
+            <div class="test-cases">
+                <div class="test-case">7 → true</div>
+                <div class="test-case">8 → false</div>
+                <div class="test-case">1 → false</div>
+                <div class="test-case">2 → true</div>
+                <div class="test-case">17 → true</div>
+            </div>
+        </div>
+
+        <div class="answer-card difficulty-expert">
+            <div class="function-header">
+                <div>
+                    <span class="function-code">ui67za01</span>
+                    <span class="difficulty-badge badge-expert">⭐⭐⭐⭐⭐ Rất khó</span>
+                </div>
+            </div>
+            <h3 class="function-name">🎲 FizzBuzz</h3>
+            <p class="function-description">Trả về "Fizz" nếu chia hết cho 3, "Buzz" nếu chia hết cho 5, "FizzBuzz" nếu chia hết cho cả 3 và 5</p>
+            <div class="function-logic">const fizzBuzz = (num) => {<br>  if (num % 15 === 0) return 'FizzBuzz';<br>  if (num % 3 === 0) return 'Fizz';<br>  if (num % 5 === 0) return 'Buzz';<br>  return num;<br>};</div>
+            <div class="test-cases">
+                <div class="test-case">15 → "FizzBuzz"</div>
+                <div class="test-case">9 → "Fizz"</div>
+                <div class="test-case">10 → "Buzz"</div>
+                <div class="test-case">7 → 7</div>
+                <div class="test-case">30 → "FizzBuzz"</div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <h3>🎮 Navigation</h3>
+            <a href="/home" class="btn btn-primary">🏠 Về Trang Chủ</a>
+            <a href="javascript:window.print()" class="btn btn-secondary">🖨️ In Trang</a>
+            <a href="javascript:window.history.back()" class="btn btn-secondary">⬅️ Quay Lại</a>
+        </div>
+    </div>
+</body>
+</html>

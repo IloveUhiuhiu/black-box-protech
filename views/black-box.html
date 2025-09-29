@@ -176,8 +176,28 @@
         //   Các hàm xử lý String + Number (theo yêu cầu)
         // =================================================================
 
+        const getStringLength = (str) => str.length;
         const countSpaces = (str) => (str.match(/ /g) || []).length;
         const startsWithA = (str) => str.toLowerCase().startsWith('a');
+        const checkLengthGreaterThan5 = (str) => str.length > 5 ? 'Dài' : 'Ngắn';
+        const multiplyByTwo = (num) => num * 2;
+        const isEven = (num) => num % 2 === 0;
+        const modulo5 = (num) => num % 5;
+        const isPositive = (num) => num > 0;
+        const divideByTwo = (num) => num / 2;
+        const doubleChars = (str) => str.split('').map(c => c + c).join('');
+        const factorial = (num) => {
+            if (num < 0) return NaN;
+            if (num === 0) return 1;
+            return num * factorial(num - 1);
+        };
+        const isPrime = (num) => {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        };
         const isGreaterThan100 = (num) => num > 100;
         const reverseString = (str) => str.split('').reverse().join('');
         const countVowels = (str) => (str.toLowerCase().match(/[aeiou]/g) || []).length;
@@ -201,6 +221,15 @@
         //   Metadata cho từng hàm với mã random 8 ký tự
         // =================================================================
         const functionDetails = {
+            st01ln34: {
+                name: 'Get String Length',
+                description: 'Trả về độ dài của chuỗi',
+                icon: '📏',
+                input: 'Chuỗi',
+                output: 'Số nguyên',
+                active: true,
+                func: getStringLength
+            },
             ab12dg23: {
                 name: 'Count Spaces',
                 description: 'Đếm số lượng khoảng trắng trong chuỗi',
@@ -308,6 +337,87 @@
                 output: 'Chuỗi hoặc Số',
                 active: true,
                 func: fizzBuzz
+            },
+            lg15gt05: {
+                name: 'Check Length Greater Than 5',
+                description: 'Trả về "Dài" nếu độ dài > 5, "Ngắn" nếu ngược lại',
+                icon: '📐',
+                input: 'Chuỗi',
+                output: 'Chuỗi',
+                active: true,
+                func: checkLengthGreaterThan5
+            },
+            mb16x002: {
+                name: 'Multiply By Two',
+                description: 'Nhân số đó với 2',
+                icon: '✖️',
+                input: 'Số',
+                output: 'Số',
+                active: true,
+                func: multiplyByTwo
+            },
+            ev18ch02: {
+                name: 'Is Even',
+                description: 'Kiểm tra xem số đó có phải là số chẵn không',
+                icon: '⚖️',
+                input: 'Số',
+                output: 'Boolean',
+                active: true,
+                func: isEven
+            },
+            md23m005: {
+                name: 'Modulo 5',
+                description: 'Lấy phần dư khi chia cho 5',
+                icon: '➗',
+                input: 'Số',
+                output: 'Số',
+                active: true,
+                func: modulo5
+            },
+            ps24tr01: {
+                name: 'Is Positive',
+                description: 'Trả về true nếu số dương, false nếu số âm (0 được coi là không dương không âm)',
+                icon: '➕',
+                input: 'Số',
+                output: 'Boolean',
+                active: true,
+                func: isPositive
+            },
+            dv25by02: {
+                name: 'Divide By Two',
+                description: 'Chia số đó cho 2',
+                icon: '➗',
+                input: 'Số',
+                output: 'Số',
+                active: true,
+                func: divideByTwo
+            },
+            dc41x002: {
+                name: 'Double Characters',
+                description: 'Lặp lại mỗi ký tự 2 lần',
+                icon: '🔤',
+                input: 'Chuỗi',
+                output: 'Chuỗi',
+                active: true,
+                func: doubleChars
+            },
+            ft47cal1: {
+                name: 'Factorial',
+                description: 'Tính giai thừa của một số',
+                icon: '📈',
+                input: 'Số',
+                output: 'Số',
+                active: true,
+                func: factorial
+            },
+            pr48chk1: {
+                name: 'Is Prime',
+                description: 'Kiểm tra xem số có phải là số nguyên tố không',
+                icon: '💎',
+                input: 'Số',
+                output: 'Boolean',
+                active: true,
+                func: isPrime
             }
         };
 
@@ -315,6 +425,7 @@
         //   Danh sách mã function hợp lệ (hardcode)
         // =================================================================
         const validCodes = [
+            'st01ln34',
             'ab12dg23',
             'xy9k4lm2',
             'qr78op56',
@@ -326,7 +437,16 @@
             'pl78ok90',
             'hj23df67',
             'we45ty89',
-            'ui67za01'
+            'ui67za01',
+            'lg15gt05',
+            'mb16x002',
+            'ev18ch02',
+            'md23m005',
+            'ps24tr01',
+            'dv25by02',
+            'dc41x002',
+            'ft47cal1',
+            'pr48chk1'
         ];
 
         

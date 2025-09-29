@@ -27,6 +27,17 @@ app.get('/black_box', (req, res) => {
     }
 });
 
+// Route cho Answer Page - yêu cầu mật khẩu
+app.get('/answer', (req, res) => {
+    const password = req.query.password;
+    const correctPassword = 'protech2025'; // Mật khẩu mặc định
+    
+    if (password === correctPassword) {
+        res.sendFile(path.join(__dirname, 'views', 'answer.html'));
+    } else {
+        res.sendFile(path.join(__dirname, 'views', 'password.html'));
+    }
+});
 
 app.use((req, res, next) => {
     res.status(404).sendFile(path.join(__dirname,'views','404.html'));
